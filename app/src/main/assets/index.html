@@ -1,0 +1,549 @@
+<html>
+
+<head>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="landmark.js"></script>
+</head>
+
+<body>
+<h1 id="title"><span id="spanDefaultTitle">請選擇行政區.推薦景點 !
+</span></h1>
+<hr>
+<table id="tbInfo" width="100%"></table>
+
+<script>
+		function getSpinnerValue(strLandmark) {
+			var index = -1;
+
+			switch (strLandmark) {
+                case "彩韻廣場":
+                    index = 0;
+                    break;
+                case "林家古厝":
+                    index = 1;
+                    break;
+                case "羊稠森林步道":
+                    index = 2;
+                    break;
+                case "五酒桶山步道":
+                    index = 3;
+                    break;
+                case "新屋蓮園":
+                    index = 4;
+                    break;
+                case "耀輝牧場":
+                    index = 5;
+                    break;
+                case "九斗村有機農場":
+                    index = 6;
+                    break;
+                case "角板山行館":
+                    index = 7;
+                    break;
+                case "金蘭醬油博物館":
+                    index = 8;
+                    break;
+                case "巴陵橋(巴陵大橋、巴陵舊橋)":
+                    index = 9;
+                    break;
+                case "福源茶廠":
+                    index = 10;
+                    break;
+                case "范姜老屋群":
+                    index = 11;
+                    break;
+                case "頭寮大池賞鳥":
+                    index = 12;
+                    break;
+                case "歐萊德綠建築總部":
+                    index = 13;
+                    break;
+                case "中台環境教育資源中心":
+                    index = 14;
+                    break;
+                case "秀才登山步道":
+                    index = 15;
+                    break;
+                case "百吉林蔭步道":
+                    index = 16;
+                    break;
+                case "龍元宮商圈":
+                    index = 17;
+                    break;
+                case "楓樹坑":
+                    index = 18;
+                    break;
+                case "大溪埔頂公園":
+                    index = 19;
+                    break;
+                case "源友咖啡文化館":
+                    index = 20;
+                    break;
+                case "溪海花卉園區":
+                    index = 21;
+                    break;
+                case "義興吊橋":
+                    index = 22;
+                    break;
+                case "忠烈祠暨桃園神社園區":
+                    index = 23;
+                    break;
+                case "大溪老茶廠":
+                    index = 24;
+                    break;
+                case "桃園藝文廣場":
+                    index = 25;
+                    break;
+                case "桃園酒廠":
+                    index = 26;
+                    break;
+                case "中央大學":
+                    index = 27;
+                    break;
+                case "大溪公會堂及蔣公行館":
+                    index = 28;
+                    break;
+                case "竹圍漁港":
+                    index = 29;
+                    break;
+                case "石門水庫":
+                    index = 30;
+                    break;
+                case "慈湖陵寢（前慈湖）":
+                    index = 31;
+                    break;
+                case "台塑企業文物館":
+                    index = 32;
+                    break;
+                case "麗嬰房采衣館":
+                    index = 33;
+                    break;
+                case "白木屋品牌探索館":
+                    index = 34;
+                    break;
+                case "宏亞巧克力共和國":
+                    index = 35;
+                    break;
+                case "富岡老街":
+                    index = 36;
+                    break;
+                case "金車咖啡文教館":
+                    index = 37;
+                    break;
+                case "養樂多工廠":
+                    index = 38;
+                    break;
+                case "龜山第一河濱公園":
+                    index = 39;
+                    break;
+                case "華泰名品城":
+                    index = 40;
+                    break;
+                case "虎頭山環保公園":
+                    index = 41;
+                    break;
+                case "桃園客家文化館":
+                    index = 42;
+                    break;
+                case "壽山巖觀音寺":
+                    index = 43;
+                    break;
+                case "卡司‧蒂菈樂園（金格觀光工廠）":
+                    index = 44;
+                    break;
+                case "景福宮":
+                    index = 45;
+                    break;
+                case "孔廟":
+                    index = 46;
+                    break;
+                case "大溪中正公園":
+                    index = 47;
+                    break;
+                case "GFun機能紡織生活館":
+                    index = 48;
+                    break;
+                case "小烏來天空繩橋":
+                    index = 49;
+                    break;
+                case "小烏來風景特定區":
+                    index = 50;
+                    break;
+                case "小烏來天空步道":
+                    index = 51;
+                    break;
+                case "齋明寺古道":
+                    index = 52;
+                    break;
+                case "御成路古道":
+                    index = 53;
+                    break;
+                case "大江國際購物中心":
+                    index = 54;
+                    break;
+                case "台灣高鐵桃園站":
+                    index = 55;
+                    break;
+                case "桃園航空城願景館":
+                    index = 56;
+                    break;
+                case "虎頭山公園":
+                    index = 57;
+                    break;
+                case "大溪慈湖步道":
+                    index = 58;
+                    break;
+                case "奧爾森林學堂":
+                    index = 59;
+                    break;
+                case "中壢仁海宮":
+                    index = 60;
+                    break;
+                case "圓光禪寺":
+                    index = 61;
+                    break;
+                case "巴陵古道生態園區":
+                    index = 62;
+                    break;
+                case "後慈湖":
+                    index = 63;
+                    break;
+                case "大溪木藝生態博物館-武德殿":
+                    index = 64;
+                    break;
+                case "李騰芳古宅":
+                    index = 65;
+                    break;
+                case "好時節休閒農場":
+                    index = 66;
+                    break;
+                case "戀戀空港灣休閒農場":
+                    index = 67;
+                    break;
+                case "龍潭區佳安村、建國路123巷":
+                    index = 68;
+                    break;
+                case "白沙岬燈塔":
+                    index = 69;
+                    break;
+                case "老街溪河川教育中心":
+                    index = 70;
+                    break;
+                case "平鎮褒忠祠(義民廟)":
+                    index = 71;
+                    break;
+                case "新勢公園":
+                    index = 72;
+                    break;
+                case "忠貞商圈":
+                    index = 73;
+                    break;
+                case "青塘園":
+                    index = 74;
+                    break;
+                case "江記豆腐乳文化館":
+                    index = 75;
+                    break;
+                case "馬祖新村文創基地":
+                    index = 76;
+                    break;
+                case "中壢觀光夜市":
+                    index = 77;
+                    break;
+                case "中原夜市商圈":
+                    index = 78;
+                    break;
+                case "中平路商圈":
+                    index = 79;
+                    break;
+                case "羊世界牧場":
+                    index = 80;
+                    break;
+                case "桃園國際棒球場":
+                    index = 81;
+                    break;
+                case "中壢中平故事館":
+                    index = 82;
+                    break;
+                case "龍岡國旗屋":
+                    index = 83;
+                    break;
+                case "中壢六和商圈":
+                    index = 84;
+                    break;
+                case "龍岡清真寺":
+                    index = 85;
+                    break;
+                case "新街國小日式宿舍群":
+                    index = 86;
+                    break;
+                case "中壢老街溪步道":
+                    index = 87;
+                    break;
+                case "祥儀機器人夢工廠":
+                    index = 88;
+                    break;
+                case "黑松飲料博物館":
+                    index = 89;
+                    break;
+                case "光泉牛奶園地（ 大園廠）":
+                    index = 90;
+                    break;
+                case "可口可樂世界":
+                    index = 91;
+                    break;
+                case "老k舒眠文化館":
+                    index = 92;
+                    break;
+                case "太平洋自行車博物館":
+                    index = 93;
+                    break;
+                case "義美食品生產． 生態． 生活廠區（ 觀光工廠）":
+                    index = 94;
+                    break;
+                case "雅聞魅力博覽館":
+                    index = 95;
+                    break;
+                case "南僑桃園觀光體驗工廠":
+                    index = 96;
+                    break;
+                case "東和音樂體驗館":
+                    index = 97;
+                    break;
+                case "中天健康生活館":
+                    index = 98;
+                    break;
+                case "郭元益糕餅博物館":
+                    index = 99;
+                    break;
+                case "泉園休閒農場":
+                    index = 100;
+                    break;
+                case "小人國":
+                    index = 101;
+                    break;
+                case "大平紅橋":
+                    index = 102;
+                    break;
+                case "桃園觀光夜市":
+                    index = 103;
+                    break;
+                case "台茂購物中心":
+                    index = 104;
+                    break;
+                case "大古山步道":
+                    index = 105;
+                    break;
+                case "坑口彩繪村":
+                    index = 106;
+                    break;
+                case "大湳圖書館":
+                    index = 107;
+                    break;
+                case "爺亨梯田":
+                    index = 108;
+                    break;
+                case "稻米博物館":
+                    index = 109;
+                    break;
+                case "三坑老街":
+                    index = 110;
+                    break;
+                case "三坑自然生態公園":
+                    index = 111;
+                    break;
+                case "龍潭觀光大池":
+                    index = 112;
+                    break;
+                case "大慶洞":
+                    index = 113;
+                    break;
+                case "觀音濱海遊憩區(風車景觀)":
+                    index = 114;
+                    break;
+                case "八德埤塘自然生態公園":
+                    index = 115;
+                    break;
+                case "大溪老街":
+                    index = 116;
+                    break;
+                case "大溪橋":
+                    index = 117;
+                    break;
+                case "龜山楓樹坑步道":
+                    index = 118;
+                    break;
+                case "興仁夜市":
+                    index = 119;
+                    break;
+                case "三民蝙蝠洞":
+                    index = 120;
+                    break;
+                case "桃園火車站前商圈":
+                    index = 121;
+                    break;
+                case "眷村故事館":
+                    index = 122;
+                    break;
+                case "基國派教堂":
+                    index = 123;
+                    break;
+                case "大溪木藝生態博物館 - 壹號館":
+                    index = 124;
+                    break;
+                case "東眼山森林遊樂區":
+                    index = 125;
+                    break;
+                case "三龜戲水":
+                    index = 126;
+                    break;
+                case "楓樹腳公園":
+                    index = 127;
+                    break;
+                case "大園公園":
+                    index = 128;
+                    break;
+                case "永安漁港":
+                    index = 129;
+                    break;
+                case "羅浮橋":
+                    index = 130;
+                    break;
+                case "小木屋休閒農場":
+                    index = 131;
+                    break;
+                case "八德三元宮":
+                    index = 132;
+                    break;
+                case "慈湖紀念雕塑公園":
+                    index = 133;
+                    break;
+                case "憶聲電子文物館":
+                    index = 134;
+                    break;
+                case "比亞外部落":
+                    index = 135;
+                    break;
+                case "拉拉山神木群":
+                    index = 136;
+                    break;
+                case "大溪陵寢":
+                    index = 137;
+                    break;
+                case "大溪河濱公園":
+                    index = 138;
+                    break;
+                case "蓮座山觀音寺":
+                    index = 139;
+                    break;
+                case "長流美術館（桃園館）":
+                    index = 140;
+                    break;
+                case "許厝港濕地":
+                    index = 141;
+                    break;
+                case "綠光森林":
+                    index = 142;
+                    break;
+                case "溪口台地":
+                    index = 143;
+                    break;
+                case "慈湖遊客服務中心":
+                    index = 144;
+                    break;
+                case "石門十一份(石門水庫管理局前的石門大草坪)":
+                    index = 145;
+                    break;
+                case "原住民文化會館":
+                    index = 146;
+                    break;
+                case "頭寮經國紀念館 (大溪遊客中心)":
+                    index = 147;
+                    break;
+                case "龍情‧魔幻豆子主題館":
+                    index = 148;
+                    break;
+                case "霄里大池":
+                    index = 149;
+                    break;
+                case "蘆竹五福宮":
+                    index = 150;
+                    break;
+                case "龍潭三水村茶園":
+                    index = 151;
+                    break;
+                case "龍潭聖蹟亭":
+                    index = 152;
+                    break;
+                case "小粗坑古道":
+                    index = 153;
+                    break;
+                case "石門山":
+                    index = 154;
+                    break;
+                case "桃園1-4號生態埤塘":
+                    index = 155;
+                    break;
+                case "觀音自行車道":
+                    index = 156;
+                    break;
+                case "蓮荷園休閒農場":
+                    index = 157;
+                    break;
+                case "大溪齋明寺":
+                    index = 158;
+                    break;
+                case "新屋綠色走廊":
+                    index = 159;
+                    break;
+			}
+
+			$('#spanDefaultTitle').remove();
+			$('#spanLandmark').remove();
+			$('#trAddress').remove();
+			$('#trWebsite').remove();
+			$('#Describe').remove();
+            $('#Traffic').remove();
+            $('#Opentime').remove();
+            $('#Pxy').remove();
+            $('#Parking').remove();
+            $('#Ticket').remove();
+            $('#Remarks').remove();
+            $('#Tel').remove();
+            $('#Fax').remove();
+            $('#Changetime').remove();
+
+			$('#title').append('<span id="spanLandmark">' + strLandmark + '</span>');
+
+			$('#tbInfo').append('<tr id="trAddress"><td width="20%"><span>地址 </span></td><td id="tdAddress" width="80%"></td></tr>'
+			                    + '<tr id="trWebsite"><td width="20%"><span>網址 </span></td><td id="tdWebsite" width="80%"></td></tr>'
+			                    + '<tr id="trDescribe"><td width="20%"><span>景點介紹 </span></td><td id="tdDescribe" width="80%"></td></tr>'
+			                    + '<tr id="trTraffic"><td width="20%"><span>交通資訊 </span></td><td id="tdTraffic" width="80%"></td></tr>'
+			                    + '<tr id="trOpentime"><td width="20%"><span>開放時間 </span></td><td id="tdOpentime" width="80%"></td></tr>'
+			                    + '<tr id="trPxy"><td width="20%"><span>經緯度 </span></td><td id="tdPxy" width="80%"></td></tr>'
+			                    + '<tr id="trParking"><td width="20%"><span>停車資訊 </span></td><td id="tdParking" width="80%"></td></tr>'
+			                    + '<tr id="trTicket"><td width="20%"><span>票價 </span></td><td id="tdTicket" width="80%"></td></tr>'
+			                    + '<tr id="trRemarks"><td width="20%"><span>備註 </span></td><td id="tdRemarks" width="80%"></td></tr>'
+			                    + '<tr id="trTel"><td width="20%"><span>電話 </span></td><td id="tdTel" width="80%"></td></tr>'
+			                    + '<tr id="trFax"><td width="20%"><span>傳真 </span></td><td id="tdFax" width="80%"></td></tr>'
+			                    + '<tr id="trChangetime"><td width="20%"><span>更新時間 </span></td><td id="tdChangetime" width="80%"></td></tr>');
+
+            $('#tdAddress').append('<span id="spanAddress">' + info.infos[index].Add + '</span>');
+            $('#tdWebsite').append('<span id="spanWebsite">' + info.infos[index].TYWebsite + '</span>');
+            $('#tdDescribe').append('<span id="spanDescribe">' + info.infos[index].Toldescribe + '</span>');
+            $('#tdTraffic').append('<span id="spanTraffic">' + info.infos[index].Travellinginfo + '</span>');
+            $('#tdOpentime').append('<span id="spanOpentime">' + info.infos[index].Opentime + '</span>');
+            $('#tdPxy').append('<span id="spanPxy">' + info.infos[index].Px + " , " + info.infos[index].Py + '</span>');
+            $('#tdParking').append('<span id="spanParking">' + info.infos[index].Parkinginfo + '</span>');
+            $('#tdTicket').append('<span id="spanTicket">' + info.infos[index].Ticketinfo + '</span>');
+            $('#tdRemarks').append('<span id="spanRemarks">' + info.infos[index].Remarks + '</span>');
+            $('#tdTel').append('<span id="spanTel">' + info.infos[index].Tel + '</span>');
+            $('#tdFax').append('<span id="spanFax">' + info.infos[index].Fax + '</span>');
+            $('#tdChangetime').append('<span id="spanChangetime">' + info.infos[index].Changetime + '</span>');
+
+		}
+
+</script>
+</body>
+
+</html>

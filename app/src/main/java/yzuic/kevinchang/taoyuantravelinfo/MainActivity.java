@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -74,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         //init layout
         llMain = (LinearLayout) findViewById(R.id.mainLayout);
+        //llMain.setBackgroundResource(R.drawable.bg);
         llMain.setWeightSum(1);
 
         tlInput = new TableLayout(this);
@@ -90,9 +94,6 @@ public class MainActivity extends AppCompatActivity {
         //init spinner
         spDistrict = new Spinner(this);
         ArrayAdapter<String> districtList = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrDistrict);
-        //districtList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //spDistrict.setDropDownHorizontalOffset(LinearLayout.LayoutParams.MATCH_PARENT);
-        //spDistrict.setDropDownWidth(LinearLayout.LayoutParams.MATCH_PARENT);
         spDistrict.setDropDownWidth(width);
         spDistrict.setAdapter(districtList);
         spLandmark = new Spinner(this);
@@ -111,8 +112,14 @@ public class MainActivity extends AppCompatActivity {
 
         //init webview
         wvOutput = new WebView(this);
+        wvOutput.getSettings().setJavaScriptEnabled(true);
+        wvOutput.getSettings().setDomStorageEnabled(true);
+        //wvOutput.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        wvOutput.addJavascriptInterface(new MyJSInterface(this), "Android");
+        wvOutput.setWebChromeClient(mWebChromeClient);
         wvOutput.setWebViewClient(new mywebview());
         pd = new ProgressDialog(this);
+        wvOutput.loadUrl("file:///android_asset/index.html");
 
         //add view
         TableRow trDistrict = new TableRow(this);
@@ -130,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
         //show context text
         Toast.makeText(ct, "歡迎使用 桃園旅遊資訊 APP !", Toast.LENGTH_SHORT).show();
-        Toast.makeText(ct, "請選擇行政區及推薦旅遊景點 !", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ct, "請選擇行政區及推薦旅遊景點 !", Toast.LENGTH_SHORT).show();
 
         //set button OnClickListener
         btnGo.setOnClickListener(new Button.OnClickListener() {
@@ -138,7 +145,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (spDistrict.getSelectedItem().toString() == "選擇行政區" || spLandmark.getSelectedItem().toString() == "選擇景點")
                     Toast.makeText(ct, "請選擇行政區及推薦旅遊景點 !", Toast.LENGTH_SHORT).show();
-                wvOutput.loadUrl("");
+                else{
+                    String strLandmark = spLandmark.getSelectedItem().toString();
+
+                    // excute js function
+                    wvOutput.loadUrl("javascript:getSpinnerValue(\""+strLandmark+"\")");
+
+                    //Toast.makeText(ct, "test !", Toast.LENGTH_SHORT).show();
+                    //wvOutput.loadUrl("file:///android_asset/index.html");
+                }
             }
         });
 
@@ -146,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
         spDistrict.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int pos = spDistrict.getSelectedItemPosition();
                 if (spDistrict.getSelectedItem().toString() == "選擇行政區") {
                     spLandmark.setEnabled(false);
                 } else {
@@ -155,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (spDistrict.getSelectedItem().toString()) {
                     case "桃園區":
-                        //Toast.makeText(ct, "桃園區 !", Toast.LENGTH_SHORT).show();
                         arrLandmark = arrTaoyuan;
                         break;
                     case "中壢區":
@@ -232,6 +245,45 @@ public class MainActivity extends AppCompatActivity {
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
             Toast.makeText(view.getContext(), "Error", Toast.LENGTH_LONG).show();
             super.onReceivedError(view, request, error);
+        }
+    }
+
+    public WebChromeClient mWebChromeClient = new WebChromeClient() {
+
+        @Override
+        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+            //Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        /**
+         * test android version 6.0 webview
+         */
+
+        @Override
+        public void onRequestFocus(WebView view) {
+            super.onRequestFocus(view);
+        }
+
+    };
+
+    public class MyJSInterface {
+        Context mContext;
+
+        /** Instantiate the interface and set the context */
+        MyJSInterface(Context c) {
+            mContext = c;
+        }
+
+        /** Show a toast from the web page */
+        @JavascriptInterface
+        public void showToast(String toast) {
+            Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+        }
+
+        @JavascriptInterface
+        public void GetStrLandmark(String string){
+
         }
     }
 }
